@@ -11,12 +11,12 @@ writer = Turtle(visible=False) # Objeto para mostrar la puntuación
 aim = vector(5, 0)             # Dirección inicial de pacman
 pacman = vector(-40, -80)      # Posición inicial de pacman
 
-# Posiciones y direcciones iniciales de los fantasmas
+# Posiciones y direcciones iniciales de los fantasmas, aumentando la velocidad a 10 en lugar de 5
 ghosts = [
-    [vector(-180, 160), vector(5, 0)],
-    [vector(-180, -160), vector(0, 5)],
-    [vector(100, 160), vector(0, -5)],
-    [vector(100, -160), vector(-5, 0)],
+    [vector(-180, 160), vector(10, 0)],
+    [vector(-180, -160), vector(0, 10)],
+    [vector(100, 160), vector(0, -10)],
+    [vector(100, -160), vector(-10, 0)],
 ]
 
 # Mapa del tablero con paredes y puntos, asegurándonos de que tenga 400 elementos (20x20)
@@ -59,7 +59,6 @@ def offset(point):
     x = (floor(point.x, 20) + 200) / 20
     y = (180 - floor(point.y, 20)) / 20
     index = int(x + y * 20)
-    # Comprueba que el índice esté dentro del rango
     if index < 0 or index >= len(tiles):
         return None
     return index
@@ -110,7 +109,7 @@ def move():
         if valid(point + course):
             point.move(course)
         else:
-            options = [vector(5, 0), vector(-5, 0), vector(0, 5), vector(0, -5)]
+            options = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
@@ -121,7 +120,7 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-    ontimer(move, 100)
+    ontimer(move, 50)  # Disminuye el tiempo del temporizador para aumentar la velocidad
 
 def change(x, y):
     """Cambia la dirección de pacman si la nueva dirección es válida"""
