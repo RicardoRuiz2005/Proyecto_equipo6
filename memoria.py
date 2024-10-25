@@ -4,10 +4,9 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')  # carga la imagen de referencia para mostrar en el centro
-tiles = list(range(32)) * 2  # crea una lista de números pares hasta 32 y duplica los elementos para hacer pares
-state = {'mark': None}  # inicializa el estado para el seguimiento del tap (marca)
-hide = [True] * 64  # establece el estado de visibilidad para cada tile (inicialmente ocultos)
-
+tiles = list(range(32)) * 2  # crea una lista de números pares hasta 32 y duplica
+state = {'mark': None}  # inicializa el estado para el seguimiento del tap
+hide = [True] * 64  # establece el estado de visibilidad de cada tile (ocultos)
 
 def square(x, y):
     """Dibuja un cuadrado blanco con borde negro en (x, y)."""
@@ -21,16 +20,15 @@ def square(x, y):
         left(90)
     end_fill()
 
-
 def index(x, y):
     """Convierte las coordenadas (x, y) en el índice de tiles."""
-    return int((x + 200) // 50 + ((y + 200) // 50) * 8)  # convierte coordenadas x, y a índice en la lista de tiles
-
+    # convierte coordenadas x, y a índice en la lista de tiles
+    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
 def xy(count):
     """Convierte el índice del tile en coordenadas (x, y)."""
-    return (count % 8) * 50 - 200, (count // 8) * 50 - 200  # convierte índice del tile a coordenadas x, y
-
+    # convierte índice del tile a coordenadas x, y
+    return (count % 8) * 50 - 200, (count // 8) * 50 - 200  
 
 def tap(x, y):
     """Actualiza la marca y oculta los tiles según el tap."""
@@ -45,7 +43,6 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-
 
 def draw():
     """Dibuja la imagen y los tiles."""
@@ -72,7 +69,6 @@ def draw():
 
     update()
     ontimer(draw, 100)
-
 
 shuffle(tiles)
 setup(420, 420, 370, 0)
