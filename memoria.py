@@ -1,27 +1,16 @@
-"""Memory, puzzle game of number pairs.
-
-Exercises:
-
-1. Count and print how many taps occur.
-2. Decrease the number of tiles to a 4x4 grid.
-3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
-"""
-
 from random import *
 from turtle import *
 
 from freegames import path
 
-car = path('car.gif')
-tiles = list(range(32)) * 2
-state = {'mark': None}
-hide = [True] * 64
+car = path('car.gif')  # carga la imagen de referencia para mostrar en el centro
+tiles = list(range(32)) * 2  # crea una lista de números pares hasta 32 y duplica los elementos para hacer pares
+state = {'mark': None}  # inicializa el estado para el seguimiento del tap (marca)
+hide = [True] * 64  # establece el estado de visibilidad para cada tile (inicialmente ocultos)
 
 
 def square(x, y):
-    """Draw white square with black outline at (x, y)."""
+    """Dibuja un cuadrado blanco con borde negro en (x, y)."""
     up()
     goto(x, y)
     down()
@@ -34,35 +23,38 @@ def square(x, y):
 
 
 def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
-    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
+    """Convierte las coordenadas (x, y) en el índice de tiles."""
+    return int((x + 200) // 50 + ((y + 200) // 50) * 8)  # convierte coordenadas x, y a índice en la lista de tiles
 
 
 def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
-    return (count % 8) * 50 - 200, (count // 8) * 50 - 200
+    """Convierte el índice del tile en coordenadas (x, y)."""
+    return (count % 8) * 50 - 200, (count // 8) * 50 - 200  # convierte índice del tile a coordenadas x, y
 
 
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    """Actualiza la marca y oculta los tiles según el tap."""
     spot = index(x, y)
     mark = state['mark']
 
+    # Si no hay marca previa o es el mismo tile, establece la nueva marca
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
+        # Si coincide con el anterior, revela ambos tiles
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
 
 
 def draw():
-    """Draw image and tiles."""
+    """Dibuja la imagen y los tiles."""
     clear()
     goto(0, 0)
     shape(car)
     stamp()
 
+    # Dibuja todos los tiles ocultos en sus posiciones correspondientes
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
@@ -70,6 +62,7 @@ def draw():
 
     mark = state['mark']
 
+    # Si hay una marca y el tile está oculto, muestra el número del tile
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
