@@ -1,43 +1,47 @@
-# Tic Tac Toe
+# Juego de Memoria
 
-Este proyecto es un juego de Tic Tac Toe básico creado en Python, utilizando Turtle Graphics y el módulo `freegames`. Se han realizado varias modificaciones para mejorar la experiencia visual del juego y añadir validaciones. Este archivo describe los cambios realizados y proporciona instrucciones para ejecutar el juego.
+Este es un sencillo juego de memoria desarrollado en Python, donde el objetivo es encontrar los pares de tiles (o cartas) idénticos. El juego utiliza la biblioteca `turtle` para gráficos y `random` para la generación aleatoria de tiles. Es ideal para practicar habilidades de concentración y retención de memoria.
 
-## Descripción del Proyecto
+## Características del Juego
 
-El juego de Tic Tac Toe permite a dos jugadores colocar los símbolos "X" y "O" en una cuadrícula 3x3, alternando turnos. El objetivo es conseguir tres símbolos en línea, ya sea en horizontal, vertical o diagonal. En este proyecto se ha hecho un esfuerzo por seguir los estándares de codificación PEP8 y mejorar la claridad del código.
+- Muestra una cuadrícula de 64 tiles (8x8), cada uno representando un número oculto.
+- El jugador debe hacer clic en los tiles para revelar el número oculto y buscar su par.
+- Si se encuentra el par, ambos tiles permanecen visibles.
+- La cuadrícula se vuelve a dibujar cada 100 milisegundos para actualizar el estado visual del juego.
+- Se ha ajustado el código siguiendo las convenciones PEP8 para mejorar la claridad y mantener un estilo profesional y estandarizado.
 
-## Modificaciones Realizadas
+## Ejercicios Pendientes
 
-Se realizaron las siguientes mejoras en el código original:
-
-1. **Cambio de Tamaño, Color y Centrado de los Símbolos**:
-   - La "X" ahora se dibuja en color azul y la "O" en color rojo.
-   - Se ajustó el tamaño y el grosor de ambos símbolos para mejorar la visibilidad en la cuadrícula.
-   - Los símbolos se centraron en sus respectivas casillas de la cuadrícula para una apariencia más estética.
-
-2. **Validación de Casillas Ocupadas**:
-   - Se implementó una validación que evita que un jugador coloque su símbolo en una casilla ya ocupada. Si una casilla ya está tomada, se imprime un mensaje en consola y el jugador debe seleccionar otra casilla.
-
-3. **Comentarios y Documentación en PEP8**:
-   - Se añadieron docstrings y comentarios en español para cada función, explicando su propósito, los parámetros y el valor de retorno (cuando aplica).
-   - Se organizaron las funciones y variables siguiendo las convenciones de nombres en PEP8.
-   - Las constantes y variables globales se declararon con nombres descriptivos en español.
+Estos son algunos ejercicios sugeridos para extender o personalizar el juego:
+1. Contar y mostrar la cantidad de clics realizados.
+2. Reducir el número de tiles a una cuadrícula de 4x4.
+3. Detectar cuándo todos los tiles han sido revelados y mostrar un mensaje de victoria.
+4. Centrar los tiles de un solo dígito.
+5. Usar letras en lugar de números en los tiles.
 
 ## Estructura del Código
 
-### Funciones Principales
+### Variables Principales
 
-- **dibujar_cuadricula**: Dibuja las líneas de la cuadrícula del juego.
-- **dibujar_x**: Dibuja el símbolo "X" en la posición indicada, con tamaño y color personalizados.
-- **dibujar_o**: Dibuja el símbolo "O" en la posición indicada, con tamaño y color personalizados.
-- **alinear_a_cuadricula**: Alinea las coordenadas proporcionadas al centro de una casilla de la cuadrícula.
-- **manejar_toque**: Maneja el toque en la pantalla, colocando un símbolo en una casilla si está libre, y alterna el turno entre los jugadores.
+- `CAR_IMAGE`: imagen que aparece en el centro de la pantalla al inicio del juego.
+- `TILE_VALUES`: lista de valores que se asignan aleatoriamente a los tiles.
+- `GAME_STATE`: diccionario que mantiene el estado actual del juego, como el tile seleccionado.
+- `HIDDEN_TILES`: lista que indica la visibilidad de cada tile (ocultos o revelados).
+- `TILE_SIZE`: tamaño en píxeles de cada tile.
+- `GRID_OFFSET`: desplazamiento que centra la cuadrícula en la pantalla.
+- `GRID_DIMENSION`: tamaño de la cuadrícula (actualmente 8x8).
 
-## Ejecución
+### Funciones
 
-Para ejecutar el juego en tu entorno local, sigue estos pasos:
+- `draw_square(tile_x, tile_y)`: Dibuja un cuadrado blanco en las coordenadas dadas.
+- `get_tile_index(click_x, click_y)`: Convierte las coordenadas del clic a un índice de tile.
+- `get_tile_coordinates(tile_index)`: Convierte el índice de tile a coordenadas en la cuadrícula.
+- `tap_tile(click_x, click_y)`: Maneja la lógica cuando el jugador hace clic en un tile.
+- `draw_game()`: Dibuja el estado actual del juego, incluyendo los tiles y la imagen de fondo.
 
-1. **Instala las dependencias**:
-   Asegúrate de que el módulo `freegames` esté instalado. Puedes instalarlo con:
+## Instalación y Ejecución
+
+1. Clona el repositorio y asegúrate de tener Python instalado en tu sistema.
+2. Instala el módulo `freegames` si no está disponible:
    ```bash
    pip install freegames
